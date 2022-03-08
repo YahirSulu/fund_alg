@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <time.h> //New
 
 
 typedef struct USER {
@@ -8,8 +9,8 @@ typedef struct USER {
     char* name;
     char* password;
     char* info;
-    user* nextUser;
-}user;
+    struct USER* nextUser;
+} user;
 
 user* createUser(char* name, char* password, char* info){
     user* newUserNode = (user*)malloc(sizeof(user));
@@ -21,7 +22,7 @@ user* createUser(char* name, char* password, char* info){
     return newUserNode;
 }
 
-void user(user** userList, user* aUserToadd){
+void addUser(user** userList, user* aUserToadd){
     if ( *userList == NULL) {
         return;
     }
@@ -30,3 +31,10 @@ void user(user** userList, user* aUserToadd){
     };
 }
 
+// New //
+void sleep(size_t m_s){  
+    m_s = m_s/1000;
+    clock_t initial_time = time(NULL); //Tiempo inicial//
+    clock_t desired_time = initial_time + m_s ;
+    for(clock_t current_time = initial_time; current_time < desired_time; current_time = time(NULL) ){};
+}
